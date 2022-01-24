@@ -28,7 +28,7 @@ namespace starterQs
             {
                 for (int x = 0; x < 3; x++)
                 {
-                    Console.Write("|" + grid[y, x] + "|");
+                    Console.Write("|" + grid[y, x] + "|"); //output current game state
                 }
                 Console.WriteLine("\n---------");
             }
@@ -59,7 +59,7 @@ namespace starterQs
                     for (int x = 0; x < 3; x++)
                     {
                         grid[y, x] = ' ';
-                        Console.Write("|" + grid[y, x] + "|");
+                        Console.Write("|" + grid[y, x] + "|"); //initial output of the game board
                     }
                     Console.WriteLine("\n---------");
                 }
