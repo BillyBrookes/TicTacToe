@@ -1,6 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 
-namespace starterQs
+namespace TicTacToe
 {
     class Program
     {
@@ -40,6 +41,7 @@ namespace starterQs
             if(grid[column, row] == 'X' || grid[column, row] == 'O')
             {
                 taken = true;
+                turn--; //avoid wasting turn if theres a cell taken
             }
             else
             {
@@ -48,9 +50,50 @@ namespace starterQs
 
             return taken;
         }
+        static void DetectWin()
+        {
+            //stale by turn
+            if (turn >= 9)
+            {
+                gameRunning = false;
+                Console.WriteLine("No one wins!");
+            }
+            //win by horizontal
+            for (int column = 0; column < 3; column++)
+            {
+                if (grid[column, 0] != ' ' && grid[column, 0] == grid[column, 1] && grid[column, 0] == grid[column, 2])
+                {
+                    gameRunning = false;
+                    Console.WriteLine(grid[column, 0] + " Wins!");
+                    break;
+                }
+            }
+            //win by vertical
+            for (int row = 0; row < 3; row++)
+            {
+                if (grid[0, row] != ' ' && grid[0, row] == grid[1, row] && grid[0, row] == grid[2, row])
+                {
+                    gameRunning = false;
+                    Console.WriteLine(grid[0, row] + " Wins!");
+                    break;
+                }
+            }
+            //win by LR diagonal
+            if(grid[0,0] == grid[1,1] && grid[0, 0] == grid[2, 2])
+            {
+                gameRunning = false;
+                Console.WriteLine(grid[0, 0] + " Wins!");
+            }
+            //win by RL diagonal
+            if (grid[0, 2] == grid[1, 1] && grid[0, 2] == grid[2, 0])
+            {
+                gameRunning = false;
+                Console.WriteLine(grid[0, 2] + " Wins!");
+            }
+        }
         static void Main(string[] args)
         {
-            if(!gameRunning)
+            if(!gameRunning) //initial printing of the game board in empty state
             {
                 Console.WriteLine("Game State:");
                 Console.WriteLine("---------");
@@ -67,9 +110,9 @@ namespace starterQs
             }
             while(gameRunning)
             {
-                Console.WriteLine("Input row value");
-                int row = Convert.ToInt32(Console.ReadLine());
                 Console.WriteLine("Input column value");
+                int row = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("Input row value");
                 int column = Convert.ToInt32(Console.ReadLine());
                 if(!isTaken(column, row)) //check if inputted coordinates are taken
                 {
@@ -79,6 +122,8 @@ namespace starterQs
                 {
                     Console.WriteLine("INVALID POSITION: CELL ALREADY TAKEN, PICK AGAIN");
                 }
+                DetectWin();
+                turn++;
             }
         }
     }
