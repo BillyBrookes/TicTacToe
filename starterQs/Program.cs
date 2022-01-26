@@ -61,7 +61,7 @@ namespace TicTacToe
             //win by horizontal
             for (int column = 0; column < 3; column++)
             {
-                if (grid[column, 0] != ' ' && grid[column, 0] == grid[column, 1] && grid[column, 0] == grid[column, 2])
+                if (grid[column, 0] != ' ' && grid[column, 1] != ' ' && grid[column, 2] != ' ' && grid[column, 0] == grid[column, 1] && grid[column, 0] == grid[column, 2])
                 {
                     gameRunning = false;
                     Console.WriteLine(grid[column, 0] + " Wins!");
@@ -71,7 +71,7 @@ namespace TicTacToe
             //win by vertical
             for (int row = 0; row < 3; row++)
             {
-                if (grid[0, row] != ' ' && grid[0, row] == grid[1, row] && grid[0, row] == grid[2, row])
+                if (grid[0, row] != ' ' && grid[1, row] != ' ' && grid[2, row] != ' ' && grid[0, row] == grid[1, row] && grid[0, row] == grid[2, row])
                 {
                     gameRunning = false;
                     Console.WriteLine(grid[0, row] + " Wins!");
@@ -79,13 +79,13 @@ namespace TicTacToe
                 }
             }
             //win by LR diagonal
-            if(grid[0,0] == grid[1,1] && grid[0, 0] == grid[2, 2])
+            if(grid[0,0] != ' ' && grid[1,1] != ' ' && grid[2, 2] != ' ' && grid[0,0] == grid[1,1] && grid[0, 0] == grid[2, 2])
             {
                 gameRunning = false;
                 Console.WriteLine(grid[0, 0] + " Wins!");
             }
             //win by RL diagonal
-            if (grid[0, 2] == grid[1, 1] && grid[0, 2] == grid[2, 0])
+            if (grid[0, 2] != ' ' && grid[1, 1] != ' ' && grid[2, 0] != ' ' && grid[0, 2] == grid[1, 1] && grid[0, 2] == grid[2, 0])
             {
                 gameRunning = false;
                 Console.WriteLine(grid[0, 2] + " Wins!");
